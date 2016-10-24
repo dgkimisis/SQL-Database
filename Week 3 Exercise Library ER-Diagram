@@ -76,8 +76,7 @@ INSERT INTO Books (Title) VALUES ('Tis eklisias to sokaki');
 
 
 create table Librarian (
-AvailableCopies int NOT NULL FOREIGN KEY REFERENCES LibraryBooks(AvailableCopies),
-BookISBN int NOT NULL FOREIGN KEY REFERENCES Books(ISBN),
+LibrarianName varchar(50) NOT NULL IDENTITY(1,1) PRIMARY KEY,
 LibrarianID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 );
 
@@ -85,8 +84,10 @@ LibrarianID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 create table Rents (
 Authorizedby int NOT NULL FOREIGN KEY REFERENCES Librarian(LibrarianID),
 Rentdate DATE NOT NULL,
+
 UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
 BookISBN int NOT NULL FOREIGN KEY REFERENCES Books(ISBN),
+LibraryID int NOT NULL FOREIGN KEY REFERENCES Libraries(LibraryID),
 RentID int NOT NULL IDENTITY(1,1) PRIMARY KEY
 );
 
