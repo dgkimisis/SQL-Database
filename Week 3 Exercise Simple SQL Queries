@@ -1,0 +1,16 @@
+SELECT Customers, Orders, Suppliers FROM Northwind
+
+SELECT Customers FROM Northwind
+ORDER BY Territories, USER_NAME
+
+SELECT Orders FROM Northwind
+ORDER BY OrderDate 
+
+SELECT Orders FROM Northwind
+WHERE YEAR(OrderDate) = 1997 
+
+SELECT Orders FROM Northwind
+WHERE OrderDate between '1997-01-01' and '1997-05-19 23:59:59'
+
+SELECT Customers FROM Northwind
+WHERE  name      like '%manager&'
