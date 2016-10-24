@@ -1,0 +1,95 @@
+use master;
+IF EXISTS(select * from sys.databases where name = 'ExerciseLibrary')
+drop database ExerciseLibrary;
+
+go
+create database ExerciseLibrary;
+go
+
+use ExerciseLibrary;
+
+
+create table Authors (
+ID int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+Name varchar(128) NOT NULL
+);
+
+if exists(select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME 
+drop table Books;
+
+
+create table Books (
+ISBN int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+Title varchar(128) NOT NULL
+);
+
+
+if exists(select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'BookAuthors')
+drop BookAuthors;
+
+create table BookAuthors (
+BookISBN int NOT NULL, FOREIGN KEY REFERENCES Books(ISBN),
+AuthorID int NOT NULL, FOREIGN KEY REFERENCES Authors(ID),
+CONSTRAINT BookAuthorID PRIMARY KEY (BookISBN, AuthorID)
+);
+
+create table Libraries (
+LibraryID int NOT NULL IDENTITY(1,1) PRIMARY KEY
+);
+
+create table LibraryBooks (
+LibraryID int NOT NULL FOREIGN KEY REFERENCES Libraries(ID),
+BookISBN int NOT NULL FOREIGN KEY REFERENCES Books(ISBN),
+PhysicalCopies int NOT NULL DEFAULT 0,
+AvailableCopies int NOT NULL DEFAULT 0,
+CONSTRAINT LibraryBooksID PRIMARY KEY (LibraryID, BookISBN)
+);
+
+
+if exists(select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'Users')
+drop Users;
+
+create table Users(
+ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+Name varchar(128) NOT NULL 
+);
+
+
+if exists(select * from INFORMATION_SCHEMA.TABLES where TABLE_NAME = 'LibraryUsers') 
+drop LibraryUsers; 
+
+create table LibraryUsers (
+LibraryID int NOT NULL FOREIGN KEY REFERENCES Libraries(ID),
+UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
+CONSTRAINT LibraryUsersID PRIMARY KEY (LibraryID, UsersID)
+);
+
+INSERT INTO Authors (Name) VALUES ('Tom Robbins');
+INSERT INTO Authors (Name) VALUES ('Sikelianos');
+INSERT INTO Authors (Name) VALUES ('Fyodor Dostoyevsky');
+
+
+INSERT INTO Books (Title) VALUES ('Even Cowgirls get the blues');
+INSERT INTO Books (Title) VALUES ('Half asleep in frog pijamas');
+INSERT INTO Books (Title) VALUES ('West Virginia gangsters');
+INSERT INTO Books (Title) VALUES ('Tis eklisias to sokaki');
+
+
+create table Librarian (
+AvailableCopies int NOT NULL FOREIGN KEY REFERENCES LibraryBooks(AvailableCopies),
+BookISBN int NOT NULL FOREIGN KEY REFERENCES Books(ISBN),
+LibrarianID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
+);
+
+
+create table Rents (
+Authorizedby int NOT NULL FOREIGN KEY REFERENCES Librarian(LibrarianID),
+Rentdate DATE NOT NULL,
+UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
+RentID int NOT NULL IDENTITY(1,1) PRIMARY KEY
+);
+
+
+
+//+Librarian table
++Rent table
