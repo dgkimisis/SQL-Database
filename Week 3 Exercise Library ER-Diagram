@@ -86,6 +86,7 @@ create table Rents (
 Authorizedby int NOT NULL FOREIGN KEY REFERENCES Librarian(LibrarianID),
 Rentdate DATE NOT NULL,
 UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
+BookISBN int NOT NULL FOREIGN KEY REFERENCES Books(ISBN),
 RentID int NOT NULL IDENTITY(1,1) PRIMARY KEY
 );
 
