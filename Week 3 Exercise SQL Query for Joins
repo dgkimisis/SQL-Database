@@ -1,0 +1,19 @@
+--SELECT * FROM Orders
+--inner join Customers on Customers.CustomerID = Orders.CustomerID
+--WHERE YEAR(RequiredDate) = 1996;
+
+
+
+--SELECT COUNT(Distinct CustomerID) AS CustomerCount, Customers.City, COUNT(Distinct EmployeeID) AS EmployerCount, Employees.City FROM Employees
+--LEFT JOIN Customers ON Employees.City = Customers.City
+--GROUP BY Customers.City, Employees.City
+
+
+--SELECT COUNT(Distinct CustomerID) AS CustomerCount, Customers.City, COUNT(Distinct EmployeeID) AS EmployerCount, Employees.City FROM Employees
+--RIGHT JOIN Customers ON Employees.City = Customers.City
+--GROUP BY Customers.City, Employees.City
+
+
+SELECT COUNT(Distinct CustomerID) AS CustomerCount, Customers.City, COUNT(Distinct EmployeeID) AS EmployeeCount, Employees.City FROM Employees
+FULL JOIN Customers ON Employees.City = Customers.City
+GROUP BY Customers.City, Employees.City
