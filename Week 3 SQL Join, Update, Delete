@@ -1,0 +1,64 @@
+--select * from Customers as c
+--left join Orders as o on c.CustomerID = o.CustomerID
+--left join [Order Details] as od on o.OrderID = od.OrderID
+--where o.orderID is NULL
+
+
+--select COUNT(OrderID), c.CustomerID, c.CompanyName from Orders as o
+--right join Customers as c on c.CustomerID = o.CustomerID
+--GROUP BY c.CustomerID, c.CompanyName
+--HAVING COUNT(OrderID)=0
+
+-------------------------------------------------------
+
+--SELECT * FROM employees
+--INSERT INTO  Employees(LastName, FirstName, Title, TitleOfCourtesy, BirthDate, HireDate, City, Region, PostalCode, Country, HomePhone, ReportsTo)
+--VALUES ('Gkimisis', 'Dimitris', 'Programer', 'Mr', 1987-10-26, 2016-11-15, 'Athens', 'Attiki', 17124, 'Greece', 2109762055, 2);
+
+
+
+--insert into Orders (CustomerID, EmployeeID, OrderDate, RequiredDate)
+--VALUES ('CHOPS', 12, 2016-11-05, 2016-11-22)
+
+
+
+
+--select * from [Order Details]
+--inner join Orders on Orders.OrderID = [Order Details].OrderID
+--insert into [Order Details] (OrderID, ProductID, UnitPrice, Quantity, Discount)
+--values(11080, 76, 23.50, 1, 0.25)
+
+
+--UPDATE  Employees
+--SET HomePhone = 2109675923
+--WHERE EmployeeID = 10
+--SELECT * FROM employees
+
+
+--UPDATE  [Order Details]
+--SET Quantity = 2
+--WHERE OrderID = 11080
+--SELECT * FROM [Order Details]
+
+
+
+--UPDATE [Order Details]
+--SET Quantity *= 2
+--FROM [Order Details]
+--INNER JOIN Orders ON Orders.OrderID = [Order Details].OrderID
+--WHERE EmployeeID = 10;
+
+
+
+
+
+---------Excersise SQL Deleting Records
+
+--DELETE FROM Employees
+--WHERE EmployeeID = 10
+
+--DELETE FROM Orders
+--WHERE EmployeeID = 10
+
+--DELETE FROM [Order Details]
+--WHERE OrderID = 11077
