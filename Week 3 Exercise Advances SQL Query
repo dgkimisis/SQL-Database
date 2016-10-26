@@ -1,0 +1,71 @@
+--Exercies Advances SQL queries
+
+--create view [dbo].[Order Subtotals] AS
+--(
+--SELECT ROUND(SUM(UnitPrice*Quantity*(1-Discount)), 2) AS TotalRevenues
+--FROM [Order Details] as od
+--INNER JOIN Orders as o ON od.OrderID = O.OrderID
+--WHERE YEAR(o.OrderDate) = 1997
+--)
+
+
+--create view [dbo].[Total Summary Per Customer] AS
+--(
+--SELECT c.CustomerID, ROUND(SUM(UnitPrice*Quantity*(1-Discount)), 2) AS TotalAmountPerCustomer
+--FROM Customers as c
+--INNER JOIN Orders as o on c.CustomerID = o.CustomerID
+--INNER JOIN [Order Details] as od on o.OrderID = od.OrderID
+--GROUP BY c.CustomerID
+--)
+
+--3
+--SELECT TOP 10 p.ProductName, ROUND(SUM(od.UnitPrice*od.Quantity*(1-od.Discount)), 2) AS Sum1 FROM [Order Details] AS od
+--INNER JOIN Products AS p ON p.ProductID = od.ProductID
+--GROUP BY p.ProductName
+
+ --4
+ --SELECT ROUND(SUM(UnitPrice*Quantity*(1-Discount)), c.CustomerID 
+ --FROM [Order Details] AS od
+ --INNER JOIN Orders AS o ON o.OrderID=od.OrderID
+ --INNER JOIN Customers AS c ON c.CustomerID = o.CustomerID
+ --GROUP BY c.CustomerID
+
+ --5
+ --SELECT ROUND(SUM(UnitPrice*Quantity*(1-Discount)), 2) 
+ --FROM [Order Details] AS od
+ --INNER JOIN Orders AS o ON o.OrderID = od.OrderID
+ --INNER JOIN Customers AS c ON o.CustomerID = c.CustomerID
+ --WHERE c.Country = 'UK'
+ --GROUP BY c.CustomerID
+ --HAVING ROUND(SUM(UnitPrice*Quantity*(1-Discount)), 2)  > 1000
+
+
+ --6
+
+--SELECT * 
+--FROM
+--(
+--SELECT c.CustomerID, c.CompanyName, c.COUNTRY, ROUND(SUM(od.UnitPrice*od.Quantity*(1-od.Discount)), 2) AS TotalPaymentPerCustomer
+--FROM Customers AS c
+--INNER JOIN Orders AS o ON o.CustomerID = c.CustomerID
+--INNER JOIN [Order Details] AS od ON o.OrderID = od.OrderID
+--GROUP BY c.CustomerID, c.CompanyName, c.COUNTRY
+-- ) AS A
+-- FULL OUTER JOIN 
+-- (
+--SELECT c.CustomerID, ROUND(SUM(od.UnitPrice*od.Quantity*(1-od.Discount)), 2) AS YearlyPaymentPerCustomer
+--FROM Customers AS c
+--INNER JOIN Orders AS o ON o.CustomerID = c.CustomerID
+--INNER JOIN [Order Details] AS od ON o.OrderID = od.OrderID
+--WHERE YEAR(o.ShippedDate) = 1997
+--GROUP BY c.CustomerID, c.CompanyName, c.COUNTRY
+--) AS B ON A.CustomerID = B.CustomerID
+
+
+
+SELECT c.CustomerID, c.CompanyName, c.COUNTRY, ROUND(SUM(od.UnitPrice*od.Quantity*(1-od.Discount)), 2) AS TotalPaymentPerCustomer
+FROM Customers AS c
+INNER JOIN Orders AS o ON o.CustomerID = c.CustomerID
+INNER JOIN [Order Details] AS od ON o.OrderID = od.OrderID
+WHERE YEAR(o.ShippedDate) = 1997
+GROUP BY c.CustomerID, c.CompanyName, c.COUNTRY 
